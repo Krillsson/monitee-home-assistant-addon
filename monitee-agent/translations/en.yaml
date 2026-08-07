@@ -1,0 +1,47 @@
+configuration:
+  username:
+    name: Username
+    description: Username the Monitee app signs in with.
+  password:
+    name: Password
+    description: Password the Monitee app signs in with. There is no default, pick one before starting.
+  server_name:
+    name: Server name
+    description: What this machine is called in the app and in Home Assistant. Empty means the hostname.
+  mqtt:
+    name: MQTT
+    description: >-
+      auto uses the broker Home Assistant already knows about, so the server turns up as a device
+      on its own. manual takes the three fields below instead. off publishes nothing.
+  mqtt_url:
+    name: MQTT broker url
+    description: Only for manual, for example tcp://192.168.0.10:1883 or ssl://192.168.0.10:8883.
+  mqtt_username:
+    name: MQTT username
+    description: Only for manual. Leave empty for a broker without authentication.
+  mqtt_password:
+    name: MQTT password
+    description: Only for manual. Leave empty for a broker without authentication.
+  mqtt_containers:
+    name: A sensor per container
+    description: Adds a binary sensor telling whether each container runs. Off, since a server can run a lot of them.
+  mqtt_network_interfaces:
+    name: Sensors per network interface
+    description: Link state and traffic rates per interface. They arrive disabled and can be turned on one by one.
+  ups:
+    name: UPS
+    description: Read a UPS over NUT. The machine running NUT has to allow connections from Home Assistant.
+  ups_host:
+    name: UPS host
+    description: Where NUT runs. Empty means localhost.
+  log_level:
+    name: Log level
+    description: How much the add-on writes to its log. Raise it to debug to see what the agent is doing.
+  custom_configuration:
+    name: Custom configuration
+    description: >-
+      Stop writing configuration.yml from these options and use the one in
+      /addon_configs/xxxxxxxx_monitee-agent instead. Everything above is then ignored.
+network:
+  8080/tcp: HTTP, GraphiQL and the GraphQL API
+  8443/tcp: HTTPS, what the app connects to

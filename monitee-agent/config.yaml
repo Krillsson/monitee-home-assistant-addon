@@ -1,0 +1,57 @@
+name: Monitee agent
+version: "0.42.0"
+slug: monitee-agent
+description: Server monitoring backend for the Monitee app
+url: https://github.com/Krillsson/monitee-agent
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+init: false
+host_network: true
+host_pid: true
+full_access: true
+udev: true
+docker_api: true
+hassio_api: true
+privileged:
+  - SYS_RAWIO
+services:
+  - mqtt:want
+# addon_config rather than app_config: the app-prefixed name only exists from
+# Supervisor 2026.07, and an unknown map type is dropped, which would leave the
+# configuration in the container instead of /addon_configs
+map:
+  - type: addon_config
+    read_only: false
+ports:
+  8080/tcp: 8080
+  8443/tcp: 8443
+ports_description:
+  8080/tcp: HTTP, GraphiQL and the GraphQL API
+  8443/tcp: HTTPS, what the app connects to
+webui: https://[HOST]:[PORT:8443]/graphiql?path=/graphql
+options:
+  username: monitee
+  password: null
+  mqtt: auto
+  mqtt_containers: false
+  mqtt_network_interfaces: true
+  ups: false
+  log_level: info
+  custom_configuration: false
+schema:
+  username: str
+  password: password
+  server_name: str?
+  mqtt: list(auto|manual|off)
+  mqtt_url: str?
+  mqtt_username: str?
+  mqtt_password: password?
+  mqtt_containers: bool
+  mqtt_network_interfaces: bool
+  ups: bool
+  ups_host: str?
+  log_level: list(trace|debug|info|warn|error)
+  custom_configuration: bool
