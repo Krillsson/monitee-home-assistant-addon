@@ -1,5 +1,5 @@
 name: Monitee agent
-version: "0.42.0"
+version: "0.42.0.1"
 slug: monitee-agent
 description: Server monitoring backend for the Monitee app
 url: https://github.com/Krillsson/monitee-agent

@@ -124,7 +124,11 @@ case "${mqtt_mode}" in
         fi
         ;;
     auto)
-        if mqtt_service="$(supervisor_get services/mqtt)"; then
+        if ! mqtt_service="$(supervisor_get services/mqtt)"; then
+            mqtt_service=""
+            log "Could not ask Home Assistant which broker to use"
+        fi
+        if [ -n "${mqtt_service}" ]; then
             broker_host="$(json_field "${mqtt_service}" '.data.host')"
             broker_port="$(json_field "${mqtt_service}" '.data.port')"
             broker_ssl="$(json_field "${mqtt_service}" '.data.ssl')"
@@ -150,7 +154,7 @@ case "${mqtt_mode}" in
             fi
         fi
 
-        if [ "${mqtt_enabled}" = "false" ]; then
+        if [ "${mqtt_enabled}" = "false" ] && [ -n "${mqtt_service}" ]; then
             log "No MQTT broker configured in Home Assistant, skipping MQTT"
         fi
         ;;
