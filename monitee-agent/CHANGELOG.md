@@ -3,6 +3,12 @@
 The first three numbers are the version of the agent this wraps. A fourth is a change to the
 add-on itself.
 
+## 0.48.0.1
+
+- Update to agent 0.48.0, which runs the native build and falls back to Java on hosts it
+  cannot run on
+- A **Runtime** option picks `auto`, `native` or `jvm`
+
 ## 0.42.0.1
 
 - Fix: the add-on would not start with Protection mode turned off. The agent image declares a

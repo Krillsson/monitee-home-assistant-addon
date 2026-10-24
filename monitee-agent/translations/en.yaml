@@ -37,6 +37,11 @@ configuration:
   log_level:
     name: Log level
     description: How much the add-on writes to its log. Raise it to debug to see what the agent is doing.
+  runtime:
+    name: Runtime
+    description: >-
+      auto runs the native build, which uses less memory, and falls back to Java if it cannot run
+      here. native never falls back, jvm always runs Java.
   custom_configuration:
     name: Custom configuration
     description: >-

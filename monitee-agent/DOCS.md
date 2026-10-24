@@ -55,6 +55,8 @@ starts. The options cover what most installs need:
   [the MQTT documentation](https://github.com/Krillsson/monitee-agent/blob/master/docs/home-assistant.md)
   for what is published.
 - **UPS** reads a UPS over NUT, from the machine named in **UPS host**.
+- **Runtime** on `auto` runs the agent's native build, which uses about half the memory, and
+  falls back to Java if it cannot run on this machine. `jvm` always runs Java.
 
 ### Beyond the options
 

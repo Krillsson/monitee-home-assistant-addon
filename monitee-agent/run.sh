@@ -193,8 +193,7 @@ metricsConfig:
       purgeEveryUnit: DAYS
 processes:
   enabled: true
-windows:
-  enableOhmJniWrapper: false
+windows: {}
 linux:
   # the host's systemd and journal are not reachable from an add-on
   systemDaemonServiceManagement:
@@ -259,15 +258,11 @@ fi
 LOGGING_LEVEL_ROOT="$(option log_level info | tr '[:lower:]' '[:upper:]')"
 export LOGGING_LEVEL_ROOT
 
+# auto leaves SYSAPI_RUNTIME unset, so a runtime file in /config still decides
+runtime="$(option runtime auto)"
+if [ "${runtime}" != "auto" ]; then
+    export SYSAPI_RUNTIME="${runtime}"
+fi
+
 cd /
-exec java \
-    -server \
-    -Djava.awt.headless=true \
-    -XX:+UseG1GC \
-    -XX:MinHeapFreeRatio=2 \
-    -XX:MaxHeapFreeRatio=10 \
-    -XX:+AlwaysPreTouch \
-    -Xmx512m \
-    -Xms128m \
-    -cp @/app/jib-classpath-file \
-    "$(cat /app/jib-main-class-file)"
+exec /app/sysapi-launcher

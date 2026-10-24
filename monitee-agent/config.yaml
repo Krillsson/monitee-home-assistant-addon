@@ -1,5 +1,5 @@
 name: Monitee agent
-version: "0.42.1.1"
+version: "0.48.0.1"
 slug: monitee-agent
 description: Server monitoring backend for the Monitee app
 url: https://github.com/Krillsson/monitee-agent
@@ -40,6 +40,7 @@ options:
   mqtt_network_interfaces: true
   ups: false
   log_level: info
+  runtime: auto
   custom_configuration: false
 schema:
   username: str
@@ -54,4 +55,5 @@ schema:
   ups: bool
   ups_host: str?
   log_level: list(trace|debug|info|warn|error)
+  runtime: list(auto|native|jvm)
   custom_configuration: bool

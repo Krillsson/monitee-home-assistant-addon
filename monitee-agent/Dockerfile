@@ -11,6 +11,9 @@ FROM ${RUNTIME_FROM}
 
 COPY --from=agent /app /app
 
+ENV LD_PRELOAD=libjemalloc.so.2 \
+    MALLOC_CONF=background_thread:true,dirty_decay_ms:5000,muzzy_decay_ms:5000,narenas:4
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends jq \
     && rm -rf /var/lib/apt/lists/*
